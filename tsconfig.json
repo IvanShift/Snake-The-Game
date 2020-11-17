@@ -1,11 +1,18 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    // "module": "system",
     "target": "es6",
-    "lib": ["es6"],
-    "sourceMap": true
+    "lib": [ "es6", "dom" ],
+    "sourceMap": true,
+   // "outFile": "./js/app.js",
+     "outDir": "./js/",
+    "rootDir": "./ts/",
+    "baseUrl": "."
+    //  ,   "resolveJsonModule": true
   },
   "exclude": [
     "node_modules"
   ]
+
+
 }
