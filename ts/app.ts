@@ -36,10 +36,10 @@ class TDrawingCanvas
 
         document.addEventListener("keydown", this.pressEventHandler);
 
-    //    document.getElementById('restart').addEventListener("click", this.restartEventHandler);
+        document.getElementById('restart').addEventListener("click", this.restartEventHandler);
     }
 
- //   private restartEventHandler = () => {       RunGame();   };
+    private restartEventHandler = () => { location.reload(true); };
 
     IsCollision(Snake: TPoint[]): boolean
     {
@@ -65,24 +65,28 @@ class TDrawingCanvas
     }
     private pressEventHandler = (e: KeyboardEvent) => {
 
-        //WASD-control
+        //WASD-control or arrows
         switch (e.keyCode) {
             //A
+            case 37:
             case 65: {
                 this.selectedDirection = Direction.Left;
                 break;
             }
             //W
+            case 38:
             case 87: {
                 this.selectedDirection = Direction.Up;
                 break;
             }
             //D
+            case 39: 
             case 68: {
                 this.selectedDirection = Direction.Right;
                 break;
             }
             //S
+            case 40: 
             case 83: {
                 this.selectedDirection = Direction.Down;
                 break;
@@ -337,5 +341,6 @@ function RunGame(): void{
     let MoveTimer = new TTimer(MoveSnake);
     MoveTimer.Start(GAME_SPEED);
 } 
+
 RunGame();
 
