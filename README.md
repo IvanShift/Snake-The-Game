@@ -3,5 +3,5 @@
 ## Goal
 To learn TypeScript by creating simple game.
 
-##Live demo
+## Live demo
 https://ivanshift.github.io/index.html
