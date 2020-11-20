@@ -6,7 +6,6 @@ class DrawingCanvas {
     private readonly CANVAS_NAME: string = "canvas";
     private readonly SNAKE_COLOR: string = "green";
     private readonly SNAKE_HEAD_COLOR: string = "blue";
-    private readonly CONTEXT: string = "2d";
     private readonly RESTART_ELEMENT: string = "restart";
     private readonly KEY_LISTENER: string = "keydown";
     private readonly MOUSE_LISTENER: string = "click";
@@ -26,7 +25,7 @@ class DrawingCanvas {
     }
     constructor() {
         this.canvas = document.getElementById(this.CANVAS_NAME) as HTMLCanvasElement;
-        this.context = this.canvas.getContext(this.CONTEXT);
+        this.context = this.canvas.getContext("2d");
         
         this.canvasSizeInCells = {
             x: Math.floor(this.canvas.width / this.CELL_SIZE),
@@ -73,22 +72,22 @@ class DrawingCanvas {
         //WASD-control or arrows
         switch (e.keyCode) {
             //A or left 
-            case 65||37: {
+            case 65: case 37: {
                 this.selectedDirection = Direction.left;
                 break;
             }
             //W or up 
-            case 87||38: {
+            case 87: case 38: {
                 this.selectedDirection = Direction.up;
                 break;
             }
             //D or right
-            case 68||39: {
+            case 68: case 39: {
                 this.selectedDirection = Direction.right;
                 break;
             }
             //S or down
-            case 83||40: {
+            case 83: case 40: {
                 this.selectedDirection = Direction.down;
                 break;
             }
@@ -286,7 +285,7 @@ class Timer {
     private funct: Function;
 
     constructor(runFunct: Function) {
-        this.timer = runFunct;
+        this.funct = runFunct;
         this.timer = setInterval(null, 10000);
     }
     start(milsec: number): void {
@@ -308,9 +307,8 @@ function runGame(): void {
     const SCORE_NAME: string = "Score: ";
     const SCORE_ELEMENT: string = "content";
 
-    let el = document.getElementById(SCORE_ELEMENT);
     let score: number = 0;
-
+    let el = document.getElementById(SCORE_ELEMENT);  
     el.innerHTML = SCORE_NAME + score;
 
     let currentCanvas = new DrawingCanvas();
@@ -320,7 +318,6 @@ function runGame(): void {
         currentCanvas.getCanvasSizeInCells()
     );
     snake.feed(snakeFood.getPosition());
-
     
     let moveSnake = () => {
         if (snake.isHungry()) {
@@ -341,6 +338,7 @@ function runGame(): void {
             currentCanvas.drawCircle(snake.getTail()[0], COLLISION_COLOR);
             currentCanvas.drawCircle(snake.getTail()[1], COLLISION_COLOR);
         }
+      
     };
 
     let moveTimer = new Timer(moveSnake);
