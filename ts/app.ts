@@ -1,5 +1,3 @@
-//import { DrawingCanvas } from './DrawingOnCanvas';
-
 class DrawingCanvas {
     private readonly CELL_SIZE: number = 20;
     private readonly GRID_LINE_COLOR: string = "lightgray";
@@ -14,7 +12,7 @@ class DrawingCanvas {
     private context: CanvasRenderingContext2D;
     private selectedDirection: Direction=Direction.up;
 
-    //from 1 to Math.floor(width or height / CELL_SIZE)
+    // from 1 to Math.floor(width or height / CELL_SIZE)
     private canvasSizeInCells: Point;
 
     getDirection(): Direction {
@@ -51,7 +49,7 @@ class DrawingCanvas {
 
     isCollision(snake: Point[]): boolean {
 
-        //Border collision
+        // Border collision
         if (snake[0].x < 1 || snake[0].x > this.canvasSizeInCells.x) {
             return  true;
         }
@@ -59,7 +57,7 @@ class DrawingCanvas {
             return true;
         }
 
-        //Self-collision
+        // Self-collision
         for (let i = 1; i < snake.length; i++) {
             if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
                 return true;
@@ -69,24 +67,24 @@ class DrawingCanvas {
         return false;
     }
     private pressEventHandler = (e: KeyboardEvent) => {
-        //WASD-control or arrows
+        // WASD-control or arrows
         switch (e.keyCode) {
-            //A or left 
+            // A or left 
             case 65: case 37: {
                 this.selectedDirection = Direction.left;
                 break;
             }
-            //W or up 
+            // W or up 
             case 87: case 38: {
                 this.selectedDirection = Direction.up;
                 break;
             }
-            //D or right
+            // D or right
             case 68: case 39: {
                 this.selectedDirection = Direction.right;
                 break;
             }
-            //S or down
+            // S or down
             case 83: case 40: {
                 this.selectedDirection = Direction.down;
                 break;
@@ -145,11 +143,11 @@ class DrawingCanvas {
     drawSnake(snake: Point[]) {
         for (let i = 0; i < snake.length; i++) {
             if (i == 0) {
-                //Head
+                // Head
                 this.drawCircle(snake[i], this.SNAKE_HEAD_COLOR);
             }
             else {
-                //tail
+                // Tail
                 this.drawCircle(snake[i], this.SNAKE_COLOR);
             }
         }
@@ -179,7 +177,7 @@ class Snake {
     private hasFood: boolean;
     private prevDirection: Direction = Direction.up;
 
-    //Snake growth down, StarPoint - Head
+    // Snake growth down, starPoint - Head
     constructor(starPoint: Point, snakeLength: number) {
         this.tail.push(starPoint);
 
@@ -230,7 +228,7 @@ class Snake {
                 this.hasFood = false;
             }
         }
-        //Do not allow to move snake back inside itself
+        // Do not allow to move snake back inside itself
         if (nextPoint.x != this.tail[1].x || nextPoint.y != this.tail[1].y) {
             this.tail.unshift(nextPoint);
             if (!isOnfoodPosition) {
